@@ -1,0 +1,9 @@
+[user]
+	name = Luke Cassidy
+	email = lukecassidy88@gmail.com
+[core]
+	editor = vim
+	pager = less -F -R -X
+[pager]
+	branch = false
+	diff = true
