@@ -9,7 +9,6 @@ export LESS="-FRX"
 export PROMPT_EOL_MARK=''
 
 # AWS CLI
-export AWS_CONFIG_FILE=/Users/luke/dev/aws/users/luke.cassidy/config
 export AWS_PAGER=""
 
 # Python pandas req
