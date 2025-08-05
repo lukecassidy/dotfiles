@@ -1,0 +1,23 @@
+# Create a directory and move into it
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
+flushdns() {
+  sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder
+}
+
+# cd to dir and open in Finder
+cdfinder() {
+  cd "$@" && open .
+}
+
+# cd to dir and open in VS Code
+cdcode () {
+  cd "$@" && code .
+}
+
+# Reload shell config
+reload() {
+  exec "$SHELL"
+}

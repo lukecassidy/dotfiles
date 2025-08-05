@@ -1,0 +1,18 @@
+# Add local bin dir to PATH
+export PATH="$HOME/bin:$PATH"
+
+# Pager QOL improvements
+export PAGER="less"
+export LESS="-FRX"
+
+# Remove % from end of files
+export PROMPT_EOL_MARK=''
+
+# AWS CLI
+export AWS_CONFIG_FILE=/Users/luke/dev/aws/users/luke.cassidy/config
+export AWS_PAGER=""
+
+# Python pandas req
+export LDFLAGS="-L$(brew --prefix libffi)/lib"
+export CPPFLAGS="-I$(brew --prefix libffi)/include"
+export PKG_CONFIG_PATH="$(brew --prefix libffi)/lib/pkgconfig"
