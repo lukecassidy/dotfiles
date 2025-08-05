@@ -1,7 +1,7 @@
 # TODO
 
 ## Placeholder
-- [ ] Automate install
+- [ ] Automate install, ensure idempotent
 - [ ] Add Makefile
 - [ ] Add AI promt config
 - [ ] VS Code Config (all)
