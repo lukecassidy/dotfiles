@@ -1,0 +1,15 @@
+# .gitignore for dotfiles repository
+*.swp
+*.swo
+.DS_Store
+*.bak
+*~
+*.tmp
+
+# Backup and notes
+.dotfiles_backup_*
+scratch.md
+
+# Local overrides for sensitive, temp or env specific settings
+.zshrc.local
+.bashrc.local
