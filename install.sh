@@ -5,7 +5,7 @@ set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 BACKUP_DIR="$HOME/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
-PACKAGES=(zsh git vim shell)
+PACKAGES=(zsh git vim shell ai)
 
 echo "Starting dotfiles setup..."
 

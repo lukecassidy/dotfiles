@@ -3,7 +3,7 @@ DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 STOW_TARGET := $(HOME)
 
 # List of stow package dirs
-PACKAGES := zsh vim git shell bash
+PACKAGES := zsh vim git shell bash ai
 
 .PHONY: all stow unstow restow install clean brew help
 
