@@ -3,7 +3,7 @@ alias exip="curl ifconfig.me"
 alias inip="ipconfig getifaddr en0"
 
 # Kubernetes aliases
-alias k="kubectl"
+alias k=kubectl
 alias kx=kubectx
 alias kn=kubens
 alias f=flux
