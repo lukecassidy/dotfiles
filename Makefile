@@ -10,22 +10,30 @@ STOW_TARGET := $(HOME)
 all: help
 
 install:
-	@$(MAKE) backup-originals
-	@echo "## Starting dotfiles install"
+	@$(MAKE) backup-create
+	@echo ">> Starting dotfiles install"
 
 	@if ! command -v brew >/dev/null 2>&1; then \
-		echo "# Installing Homebrew"; \
+		echo ">> Installing Homebrew"; \
 		NONINTERACTIVE=1 /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
 		eval "$$(/opt/homebrew/bin/brew shellenv)"; \
 	fi
 
-	@echo "## Installing packages from Brewfile"
+	@echo ">> Installing packages from Brewfile"
 	@brew bundle --file=$(BREWFILE)
 
 	@$(MAKE) stow
 
-backup-originals:
-	@echo "## Backing up non-symlinked dotfiles to: $(BACKUP_DIR)"
+stow:
+	@echo ">> Stowing packages: $(PACKAGES)"
+	@cd $(DOTFILES_DIR) && stow --target=$(STOW_TARGET) $(PACKAGES)
+
+unstow:
+	@echo ">> Unstowing packages: $(PACKAGES)"
+	@cd $(DOTFILES_DIR) && stow --target=$(STOW_TARGET) -D $(PACKAGES)
+
+backup-create:
+	@echo ">> Backing up non-symlinked dotfiles to: $(BACKUP_DIR)"
 	@mkdir -p $(BACKUP_DIR)
 	@for file in $(DOTFILES); do \
 		target="$(HOME)/$$file"; \
@@ -34,20 +42,23 @@ backup-originals:
 		fi; \
 	done
 
-stow:
-	@echo "## Stowing packages: $(PACKAGES)"
-	@cd $(DOTFILES_DIR) && stow --target=$(STOW_TARGET) $(PACKAGES)
+backup-restore:
+	@echo ">> Available backups:"
+	@select dir in $$(ls -1dt $(HOME)/.dotfiles_backup_* 2>/dev/null); do \
+		if [ -n "$$dir" ]; then \
+			echo ">> Restoring from: $$dir"; \
+			$(MAKE) unstow; \
+			for f in $(DOTFILES); do \
+				[ -e "$$dir/$$f" ] && cp "$$dir/$$f" "$(HOME)/$$f" && echo "Restored $$f"; \
+			done; \
+			break; \
+		else \
+			echo "Invalid selection."; \
+		fi; \
+	done
 
-unstow:
-	@echo "## Unstowing packages: $(PACKAGES)"
-	@cd $(DOTFILES_DIR) && stow --target=$(STOW_TARGET) -D $(PACKAGES)
-
-restow:
-	@$(MAKE) unstow
-	@$(MAKE) stow
-
-clean:
-	@echo "## Removing all backup directories"
+backup-clean:
+	@echo ">> Removing all backup directories"
 	@rm -rf $(HOME)/.dotfiles_backup_*
 
 status:
@@ -64,13 +75,13 @@ help:
 	@echo "Available make commands:"
 	@echo ""
 	@echo "  install           Backup originals, install Homebrew and packages, stow dotfiles"
-	@echo "  backup-originals  Move real (non-symlinked) dotfiles to backup directory"
 	@echo "  stow              Stow dotfiles to home directory"
 	@echo "  unstow            Unstow directory symlinks"
-	@echo "  restow            Unstow and then stow dotfiles"
-	@echo "  clean             Remove all dotfile backup directories"
+	@echo "  backup-create     Move real (non-symlinked) dotfiles to backup directory"
+	@echo "  backup-restore    Restore dotfiles from a backup directory"
+	@echo "  backup-clean      Remove all dotfile backup directories"
 	@echo "  status            Show current dotfile symlinks"
 	@echo "  help              Show this help message"
 	@echo ""
 
-.PHONY: all install backup-originals stow unstow restow clean help status
+.PHONY: all install stow unstow backup-create backup-restore backup-clean status help
