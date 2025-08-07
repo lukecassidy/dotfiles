@@ -5,7 +5,7 @@ The tools I need to get my environment up and running.
 ```bash
 git clone https://github.com/lukecassidy/dotfiles.git
 cd dotfiles
-./install.sh
+make install
 ```
 
 ## Connect the dot(files) 
