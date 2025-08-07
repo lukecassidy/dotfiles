@@ -4,7 +4,6 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-BACKUP_DIR="$HOME/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
 PACKAGES=(zsh git vim shell ai)
 
 echo "Starting dotfiles setup..."
@@ -19,16 +18,6 @@ fi
 # Install packages from Brewfile
 echo "  Installing packages from Brewfile..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
-
-# Backup existing dotfiles
-echo "  Backing up existing dotfiles..."
-mkdir -p "$BACKUP_DIR"
-for file in .zshrc .vimrc .gitconfig .aliases .exports .functions; do
-  target="$HOME/$file"
-  if [[ -e "$target" && ! -L "$target" ]]; then
-    mv "$target" "$BACKUP_DIR/"
-  fi
-done
 
 # Stow dotfiles
 echo "  Linking dotfiles using Stow..."
