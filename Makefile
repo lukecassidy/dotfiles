@@ -1,19 +1,18 @@
 # Set default dotfiles dir
-DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
+DOTFILES_DIR := $(CURDIR)
 STOW_TARGET := $(HOME)
 
 # List of stow package dirs
 PACKAGES := zsh vim git shell bash ai
 
-.PHONY: all stow unstow restow install clean brew help
+.PHONY: all install stow unstow restow brew clean status help
 
 # Default target
 all: help
 
 install:
 	@echo "Running install.sh"
-	@chmod +x $(DOTFILES_DIR)/install.sh
-	@$(DOTFILES_DIR)/install.sh
+	@bash $(DOTFILES_DIR)/install.sh
 
 stow:
 	@echo "Stowing packages: $(PACKAGES)"
@@ -23,7 +22,9 @@ unstow:
 	@echo "Unstowing packages: $(PACKAGES)"
 	@cd $(DOTFILES_DIR) && stow --target=$(STOW_TARGET) -D $(PACKAGES)
 
-restow: unstow stow
+restow:
+	@$(MAKE) unstow
+	@$(MAKE) stow
 
 brew:
 	@echo "Installing packages from Brewfile"
@@ -32,6 +33,15 @@ brew:
 clean:
 	@echo "Removing backup files"
 	@rm -rf ~/.dotfiles_backup_*
+
+status:
+	@echo "Currently stowed files pointing to dotfiles:"
+	@for f in $$(find $(HOME) -maxdepth 1 -type l); do \
+		target=$$(readlink "$$f"); \
+		case $$target in \
+			*dotfiles*) echo "$$f -> $$target";; \
+		esac; \
+	done
 
 help:
 	@echo ""
@@ -43,5 +53,6 @@ help:
 	@echo "  restow         Unstow and stow dotfiles"
 	@echo "  brew           Install packages from Brewfile"
 	@echo "  clean          Remove backup files"
+	@echo "  status         Show currently stowed files"
 	@echo "  help           Show this help message"
 	@echo ""
