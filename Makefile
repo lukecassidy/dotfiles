@@ -19,6 +19,11 @@ install:
 		eval "$$(/opt/homebrew/bin/brew shellenv)"; \
 	fi
 
+	@if ! command -v stow >/dev/null 2>&1; then \
+		echo ">> Installing Stow"; \
+		brew install stow; \
+	fi
+
 	@echo ">> Installing packages from Brewfile"
 	@brew bundle --file=$(BREWFILE)
 
