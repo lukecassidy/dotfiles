@@ -1,0 +1,8 @@
+# .gitignore applied to all local repo's
+*.swp
+*.swo
+.DS_Store
+*.bak
+*~
+*.tmp
+scratch.md
