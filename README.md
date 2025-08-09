@@ -1,5 +1,5 @@
 # Dotfiles
-The tools I need to get my environment up and running.
+The tools I need to get my environment up and running. Keeps my configs in sync with GNU Stow, installs my tools with Homebrew and backs up anything it replaces (just in case).
 
 ## Setup
 ```bash
