@@ -1,7 +1,6 @@
 # TODO
 
 ## Placeholder
-- [ ] VS Code Config (all)
-- [ ] Add browser config
-- [ ] Add macos config
-- [ ] Update README.md
+- [ ] Add vscode config (as a backup)
+- [ ] Add macos config (as a startup script)
+- [ ] Update README.md 
