@@ -75,6 +75,12 @@ status:
 		esac; \
 	done
 
+brew-update:
+	@brew update && brew upgrade && brew cleanup -s
+
+brew-dump:
+	@brew bundle dump --file=$(BREWFILE) --force --describe
+
 help:
 	@echo ""
 	@echo "Available make commands:"
@@ -86,7 +92,9 @@ help:
 	@echo "  backup-restore    Restore dotfiles from a backup directory"
 	@echo "  backup-clean      Remove all dotfile backup directories"
 	@echo "  status            Show current dotfile symlinks"
-	@echo "  help              Show this help message"
+ @echo "  brew-update       Handy way to update Brew
+	@echo "  brew-dump         Dump the brewfile
+	@echo "  help              Show this help message
 	@echo ""
 
 .PHONY: all install stow unstow backup-create backup-restore backup-clean status help
