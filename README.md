@@ -6,7 +6,7 @@ It takes care of:
 - Installing packages and apps with Homebrew
 - Getting Oh My Zsh up and running
 - Backing up any existing dotfiles before making changes
-- Applying macOS tweaks so my setup always feels just right
+- Applying macOS tweaks for that consistent feel
 
 ## Setup
 ```bash
