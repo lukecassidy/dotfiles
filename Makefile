@@ -1,15 +1,19 @@
-# Configuration
-BACKUP_DIR := $(HOME)/.dotfiles_backup_$(shell date +%Y%m%d_%H%M%S)
+# Makefile for managing dotfiles
+SHELL := /bin/bash
+.SHELLFLAGS := -eu -o pipefail -c
+
 DOTFILES_DIR := $(CURDIR)
-DOTFILES := .zshrc .vimrc .gitconfig .aliases .exports .functions .aicontext .bashrc
+STOW_TARGET  := $(HOME)
+BACKUP_DIR   := $(HOME)/.dotfiles_backup_$(shell date +%Y%m%d_%H%M%S)
+BREWFILE     := $(DOTFILES_DIR)/Brewfile
+OMZ_DIR      := $(HOME)/.oh-my-zsh
+
 PACKAGES := zsh vim git shell bash ai
-BREWFILE := $(DOTFILES_DIR)/Brewfile
-STOW_TARGET := $(HOME)
+DOTFILES := .zshrc .vimrc .gitconfig .aliases .exports .functions .aicontext .bashrc
 
-# Default target
+# Make 'help' the default target when running with no arguments
+.DEFAULT_GOAL := help
 all: help
-
-OMZ_DIR:= $(HOME)/.oh-my-zsh
 
 install:
 	@$(MAKE) backup-create
