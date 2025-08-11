@@ -7,8 +7,35 @@ defaults write com.apple.dock show-process-indicators -bool true              # 
 defaults write com.apple.dock tilesize -int 32                                # Dock size (small)
 defaults write com.apple.dock magnification -bool false                       # Disable magnification
 defaults write com.apple.dock orientation -string "bottom"                    # Dock position
-defaults write com.apple.dock persistent-apps -array                          # Clear default Dock icons
 defaults write com.apple.dock minimize-to-application -bool true              # Minimise windows into app icon
+
+# Clear default Dock icons and add our own
+defaults write com.apple.dock persistent-apps -array                          
+if command -v dockutil >/dev/null 2>&1; then
+  dock_apps=(
+    "/System/Applications/Finder.app"
+    "/Applications/Slack.app"
+    "/Applications/Visual Studio Code.app"
+    "/Applications/Bitwarden.app"
+    "/Applications/1Password 7 - Password Manager.app"
+    "/Applications/Notion.app"
+    "/Applications/iTerm.app"
+    "/Applications/ChatGPT.app"
+    "/Applications/Spotify.app"
+    "/Applications/Google Chrome.app"
+    "/Applications/Docker.app"
+    "/Applications/MySQL Workbench.app"
+    "/Applications/pgAdmin 4.app"
+    "/Applications/Postman.app"
+    "/Applications/Wireshark.app"
+    "/System/Applications/Launchpad.app"
+    "/System/Applications/System Preferences.app"
+  )
+
+  for app in "${dock_apps[@]}"; do
+    [[ -e "$app" ]] && dockutil --add "$app" --no-restart
+  done
+fi
 
 # Finder
 defaults write -g AppleShowAllExtensions -bool true
