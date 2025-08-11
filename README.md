@@ -4,7 +4,7 @@ The tools I need to get my environment up and running.
 It takes care of:
 - Keeping your dotfiles in sync across machines with [GNU Stow](https://www.gnu.org/software/stow/)
 - Installing packages and apps with Homebrew
-- Getting up Oh My Zsh up and running
+- Getting Oh My Zsh up and running
 - Backing up any existing dotfiles before making changes
 - Applying macOS tweaks so my setup always feels just right
 
