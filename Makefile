@@ -9,6 +9,8 @@ STOW_TARGET := $(HOME)
 # Default target
 all: help
 
+OMZ_DIR:= $(HOME)/.oh-my-zsh
+
 install:
 	@$(MAKE) backup-create
 	@echo ">> Starting dotfiles install"
@@ -26,6 +28,12 @@ install:
 
 	@echo ">> Installing packages from Brewfile"
 	@brew bundle --file=$(BREWFILE) --no-upgrade || true
+
+    # Install omz via shallow clone to avoid side effects and keep it lightweight
+	@if [ ! -d "$(OMZ_DIR)" ]; then \
+		echo ">> Installing Oh My Zsh"; \
+		git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$(OMZ_DIR)"; \
+	fi
 
 	@$(MAKE) stow
 
