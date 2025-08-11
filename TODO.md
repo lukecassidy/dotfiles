@@ -1,2 +1,2 @@
 # TODO
-- [ ] Add macos config (defaults write)
+- [ ] Add macos config
