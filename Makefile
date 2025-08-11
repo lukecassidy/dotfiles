@@ -7,6 +7,7 @@ STOW_TARGET  := $(HOME)
 BACKUP_DIR   := $(HOME)/.dotfiles_backup_$(shell date +%Y%m%d_%H%M%S)
 BREWFILE     := $(DOTFILES_DIR)/Brewfile
 OMZ_DIR      := $(HOME)/.oh-my-zsh
+MACOS_SCRIPT := $(DOTFILES_DIR)/macos/defaults.sh
 
 PACKAGES := zsh vim git shell bash ai
 DOTFILES := .zshrc .vimrc .gitconfig .aliases .exports .functions .aicontext .bashrc
@@ -16,9 +17,10 @@ DOTFILES := .zshrc .vimrc .gitconfig .aliases .exports .functions .aicontext .ba
 all: help
 
 install:
-	@$(MAKE) backup-create
-	@echo ">> Starting dotfiles install"
+	@echo ">> Starting installation process..."
 
+	@$(MAKE) backup-create
+	
 	@if ! command -v brew >/dev/null 2>&1; then \
 		echo ">> Installing Homebrew"; \
 		NONINTERACTIVE=1 /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
@@ -40,6 +42,10 @@ install:
 	fi
 
 	@$(MAKE) stow
+
+	@$(MAKE) macos-setup
+
+	@echo ">> Installation complete!"
 
 stow:
 	@echo ">> Stowing packages: $(PACKAGES)"
@@ -84,6 +90,10 @@ brew-update:
 brew-dump:
 	@brew bundle dump --file=$(BREWFILE) --force --no-vscode
 
+macos-setup:
+	@echo ">> Applying macOS defaults"
+	@bash "$(MACOS_SCRIPT)"
+
 status:
 	@echo "Currently stowed files pointing to dotfiles:"
 	@for f in $$(find $(HOME) -maxdepth 1 -type l); do \
@@ -103,10 +113,11 @@ help:
 	@echo "  backup-create     Move real (non-symlinked) dotfiles to backup directory"
 	@echo "  backup-restore    Restore dotfiles from a backup directory"
 	@echo "  backup-clean      Remove all dotfile backup directories"
-	@echo "  status            Show current dotfile symlinks"
 	@echo "  brew-update       Handy way to update Brew"
 	@echo "  brew-dump         Dump the brewfile"
+	@echo "  macos-setup       Apply macOS defaults from $(MACOS_SCRIPT)"
+	@echo "  status            Show current dotfile symlinks"
 	@echo "  help              Show this help message"
 	@echo ""
 
-.PHONY: all install stow unstow backup-create backup-restore backup-clean brew-update brew-dump status help
+.PHONY: all install stow unstow backup-create backup-restore backup-clean brew-update brew-dump macos-setup status help

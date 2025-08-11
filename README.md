@@ -1,12 +1,29 @@
 # Dotfiles
-The tools I need to get my environment up and running. Keeps my configs in sync with GNU Stow, installs my tools with Homebrew and backs up anything it replaces (just in case).
+The tools I need to get my environment up and running.
+
+It takes care of:
+- Keeping your dotfiles in sync across machines with [GNU Stow](https://www.gnu.org/software/stow/)
+- Installing packages and apps with Homebrew
+- Getting up Oh My Zsh up and running
+- Backing up any existing dotfiles before making changes
+- Applying macOS tweaks so my setup always feels just right
 
 ## Setup
 ```bash
-git clone https://github.com/lukecassidy/dotfiles.git
+git clone https://github.com/yourusername/dotfiles.git
 cd dotfiles
 make install
 ```
 
-## Connect the dot(files) 
-![Image](https://github.com/user-attachments/assets/0b3f1d09-de43-4352-9f95-47d8ca04c8f7)
+## Makefile Commands
+| Command               | Description                                                                  |
+| --------------------- | ---------------------------------------------------------------------------- |
+| `make install`        | Backup dotfiles, install brew packages, stow dotfiles and apply mac defaults |
+| `make backup-create`  | Backup existing (non-symlinked) dotfiles                                     |
+| `make backup-restore` | Restore dotfiles from a backup                                               |
+| `make backup-clean`   | Remove all dotfile backup directories                                        |
+| `make stow`           | Apply stow symlinks                                                          |
+| `make unstow`         | Remove stow symlinks                                                         |
+| `make brew-update`    | Update Homebrew packages                                                     |
+| `make brew-dump`      | Regenerate repo Brewfile from current machine installs                       |
+| `make macos-setup`    | Apply macOS defaults                                                         |
