@@ -10,7 +10,7 @@ It takes care of:
 
 ## Setup
 ```bash
-git clone https://github.com/lukecassidy/dotfiles.git
+git clone git@github.com:lukecassidy/dotfiles.git
 cd dotfiles
 make install
 ```
