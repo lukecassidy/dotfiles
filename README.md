@@ -8,12 +8,18 @@ It takes care of:
 - Backing up any existing dotfiles before making changes
 - Applying macOS tweaks for that consistent feel
 
+---
+
 ## Setup
 ```bash
 git clone git@github.com:lukecassidy/dotfiles.git
 cd dotfiles
 make install
 ```
+
+![Image](https://github.com/user-attachments/assets/5b4dd702-771d-4079-8398-f69aa006a5b8)
+
+--- 
 
 ## Makefile Commands
 | Command               | Description                                                                  |
@@ -27,3 +33,5 @@ make install
 | `make brew-update`    | Update Homebrew packages                                                     |
 | `make brew-dump`      | Regenerate repo Brewfile from current machine installs                       |
 | `make macos-setup`    | Apply macOS defaults                                                         |
+
+
