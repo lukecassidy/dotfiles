@@ -2,15 +2,15 @@
 set -euo pipefail
 
 # Dock
-defaults write com.apple.dock autohide -bool false                            # Don't auto-hide Dock
-defaults write com.apple.dock show-process-indicators -bool true              # Show indicators for open apps
-defaults write com.apple.dock tilesize -int 32                                # Dock size (small)
-defaults write com.apple.dock magnification -bool false                       # Disable magnification
-defaults write com.apple.dock orientation -string "bottom"                    # Dock position
-defaults write com.apple.dock minimize-to-application -bool true              # Minimise windows into app icon
+defaults write com.apple.dock autohide -bool false                # Don't auto-hide Dock
+defaults write com.apple.dock show-process-indicators -bool true  # Show indicators for open apps
+defaults write com.apple.dock tilesize -int 32                    # Dock size (small)
+defaults write com.apple.dock magnification -bool false           # Disable magnification
+defaults write com.apple.dock orientation -string "bottom"        # Dock position
+defaults write com.apple.dock minimize-to-application -bool true  # Minimise windows into app icon
 
 # Clear default Dock icons and add our own
-defaults write com.apple.dock persistent-apps -array                          
+defaults write com.apple.dock persistent-apps -array
 if command -v dockutil >/dev/null 2>&1; then
   dock_apps=(
     "/System/Applications/Finder.app"
@@ -56,7 +56,7 @@ defaults write com.apple.menuextra.battery ShowPercent -bool true             # 
 defaults write com.apple.controlcenter BatteryShowPercentage -bool true       # Show battery percentage in Control Center
 
 # Keyboard, Trackpad & Mouse
-defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode -string "TwoButtonRight"  # Right‑click
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode -string "TwoButtonRight" # Right‑click
 defaults write com.apple.BezelServices kDim -bool true                        # Auto keyboard backlight
 defaults write -g com.apple.mouse.scaling -float 3.0                          # Mouse tracking speed (fast)
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true # Enable three-finger drag
