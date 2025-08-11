@@ -25,7 +25,7 @@ install:
 	fi
 
 	@echo ">> Installing packages from Brewfile"
-	@brew bundle --file=$(BREWFILE)
+	@brew bundle --file=$(BREWFILE) --no-upgrade || true
 
 	@$(MAKE) stow
 
@@ -66,6 +66,12 @@ backup-clean:
 	@echo ">> Removing all backup directories"
 	@rm -rf $(HOME)/.dotfiles_backup_*
 
+brew-update:
+	@brew update && brew upgrade && brew cleanup -s
+
+brew-dump:
+	@brew bundle dump --file=$(BREWFILE) --force --no-vscode
+
 status:
 	@echo "Currently stowed files pointing to dotfiles:"
 	@for f in $$(find $(HOME) -maxdepth 1 -type l); do \
@@ -74,12 +80,6 @@ status:
 			*dotfiles*) echo "$$f -> $$target";; \
 		esac; \
 	done
-
-brew-update:
-	@brew update && brew upgrade && brew cleanup -s
-
-brew-dump:
-	@brew bundle dump --file=$(BREWFILE) --force --describe
 
 help:
 	@echo ""
@@ -92,9 +92,9 @@ help:
 	@echo "  backup-restore    Restore dotfiles from a backup directory"
 	@echo "  backup-clean      Remove all dotfile backup directories"
 	@echo "  status            Show current dotfile symlinks"
- @echo "  brew-update       Handy way to update Brew
-	@echo "  brew-dump         Dump the brewfile
-	@echo "  help              Show this help message
+	@echo "  brew-update       Handy way to update Brew"
+	@echo "  brew-dump         Dump the brewfile"
+	@echo "  help              Show this help message"
 	@echo ""
 
-.PHONY: all install stow unstow backup-create backup-restore backup-clean status help
+.PHONY: all install stow unstow backup-create backup-restore backup-clean brew-update brew-dump status help
