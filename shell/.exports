@@ -18,3 +18,8 @@ export PKG_CONFIG_PATH="$(brew --prefix libffi)/lib/pkgconfig"
 
 # Set up AI context
 export AICTX=$(cat ~/.aicontext)
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
