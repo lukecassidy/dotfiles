@@ -84,9 +84,6 @@ backup-clean:
 	@echo ">> Removing all backup directories"
 	@rm -rf $(HOME)/.dotfiles_backup_*
 
-brew-update:
-	@brew update && brew upgrade && brew cleanup -s
-
 brew-dump:
 	@brew bundle dump --file=$(BREWFILE) --force --no-vscode
 
@@ -113,11 +110,10 @@ help:
 	@echo "  backup-create     Move real (non-symlinked) dotfiles to backup directory"
 	@echo "  backup-restore    Restore dotfiles from a backup directory"
 	@echo "  backup-clean      Remove all dotfile backup directories"
-	@echo "  brew-update       Handy way to update Brew"
 	@echo "  brew-dump         Dump the brewfile"
 	@echo "  macos-setup       Apply macOS defaults from $(MACOS_SCRIPT)"
 	@echo "  status            Show current dotfile symlinks"
 	@echo "  help              Show this help message"
 	@echo ""
 
-.PHONY: all install stow unstow backup-create backup-restore backup-clean brew-update brew-dump macos-setup status help
+.PHONY: all install stow unstow backup-create backup-restore backup-clean brew-dump macos-setup status help
