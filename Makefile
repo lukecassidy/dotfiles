@@ -85,7 +85,12 @@ backup-clean:
 	@rm -rf $(HOME)/.dotfiles_backup_*
 
 brew-dump:
+	@echo ">> Dumping current brewfile to: $(BREWFILE)"
 	@brew bundle dump --file=$(BREWFILE) --force --no-vscode
+
+brew-upgrade:
+	@echo ">> Upgrading all installed Homebrew packages"
+	@brew update && brew upgrade && brew cleanup -s
 
 macos-setup:
 	@echo ">> Applying macOS defaults"
@@ -111,9 +116,10 @@ help:
 	@echo "  backup-restore    Restore dotfiles from a backup directory"
 	@echo "  backup-clean      Remove all dotfile backup directories"
 	@echo "  brew-dump         Dump the brewfile"
+	@echo "  brew-upgrade      Upgrade all installed Homebrew packages"
 	@echo "  macos-setup       Apply macOS defaults from $(MACOS_SCRIPT)"
 	@echo "  status            Show current dotfile symlinks"
 	@echo "  help              Show this help message"
 	@echo ""
 
-.PHONY: all install stow unstow backup-create backup-restore backup-clean brew-dump macos-setup status help
+.PHONY: all install stow unstow backup-create backup-restore backup-clean brew-dump brew-upgrade macos-setup status help
