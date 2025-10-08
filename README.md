@@ -25,13 +25,13 @@ make install
 | Command               | Description                                                                  |
 | --------------------- | ---------------------------------------------------------------------------- |
 | `make install`        | Backup dotfiles, install brew packages, stow dotfiles and apply mac defaults |
+| `make stow`           | Apply stow symlinks                                                          |
+| `make unstow`         | Remove stow symlinks                                                         |
 | `make backup-create`  | Backup existing (non-symlinked) dotfiles                                     |
 | `make backup-restore` | Restore dotfiles from a backup                                               |
 | `make backup-clean`   | Remove all dotfile backup directories                                        |
-| `make stow`           | Apply stow symlinks                                                          |
-| `make unstow`         | Remove stow symlinks                                                         |
-| `make brew-update`    | Update Homebrew packages                                                     |
 | `make brew-dump`      | Regenerate repo Brewfile from current machine installs                       |
+| `make brew-upgrade`   | Upgrading all installed brew packages                                        |
 | `make macos-setup`    | Apply macOS defaults                                                         |
-
-
+| `make status`         | Show current dotfile symlinks                                                |
+| `make help`           | Show Makefile help message                                                   |
