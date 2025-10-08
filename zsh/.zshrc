@@ -23,9 +23,18 @@ setopt autocd              # change dir by typing just folder name
 setopt globdots            # include dotfiles when globbing(*)
 setopt interactivecomments # allow comments in interactive shells
 
+# Set Homebrew prefix based on architecture
+if [[ -z "$HOMEBREW_PREFIX" ]]; then
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    HOMEBREW_PREFIX="/opt/homebrew"
+  else
+    HOMEBREW_PREFIX="/usr/local"
+  fi
+fi
+
 # Syntax highlighting and autosuggestions (manual source required for Homebrew installs)
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[ -f "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Local overrides for sensitive, temp or env specific settings
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

@@ -69,7 +69,6 @@ brew "idoavrah/homebrew/tftui"
 brew "weaveworks/tap/eksctl"
 cask "1password"
 cask "bitwarden"
-cask "chatgpt"
 cask "docker"
 cask "google-chrome"
 cask "hammerspoon"
@@ -82,3 +81,8 @@ cask "slack"
 cask "spotify"
 cask "visual-studio-code"
 cask "wireshark"
+
+# Architecture specific packages and casks
+if Hardware::CPU.arm?
+  cask "chatgpt"
+end
