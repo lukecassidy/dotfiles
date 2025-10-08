@@ -17,7 +17,7 @@ if command -v dockutil >/dev/null 2>&1; then
     "/Applications/Slack.app"
     "/Applications/Visual Studio Code.app"
     "/Applications/Bitwarden.app"
-    "/Applications/1Password 7 - Password Manager.app"
+    "/Applications/1Password.app"
     "/Applications/Notion.app"
     "/Applications/iTerm.app"
     "/Applications/ChatGPT.app"
