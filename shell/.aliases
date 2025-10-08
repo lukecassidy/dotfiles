@@ -8,3 +8,5 @@ alias kx=kubectx
 alias kn=kubens
 alias f=flux
 alias h=helm
+
+alias updatedb="sudo /usr/libexec/locate.updatedb"
