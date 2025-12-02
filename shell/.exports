@@ -16,8 +16,8 @@ export LDFLAGS="-L$(brew --prefix libffi)/lib"
 export CPPFLAGS="-I$(brew --prefix libffi)/include"
 export PKG_CONFIG_PATH="$(brew --prefix libffi)/lib/pkgconfig"
 
-# Set up AI context
-export AICTX=$(cat ~/.aicontext)
+# Set up global system prompt
+export AI_SYSTEM_PROMPT=$(cat ~/.systems-prompt.md 2>/dev/null)
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"

@@ -10,7 +10,7 @@ OMZ_DIR      := $(HOME)/.oh-my-zsh
 MACOS_SCRIPT := $(DOTFILES_DIR)/macos/defaults.sh
 
 PACKAGES := zsh vim git shell bash ai
-DOTFILES := .zshrc .vimrc .gitconfig .aliases .exports .functions .aicontext .bashrc
+DOTFILES := .zshrc .vimrc .gitconfig .aliases .exports .functions .system-prompt .bashrc
 
 # Make 'help' the default target when running with no arguments
 .DEFAULT_GOAL := help
